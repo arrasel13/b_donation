@@ -1,0 +1,792 @@
+/* Font integration */
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf');
+}
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf');
+}
+@font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf');
+}
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf');
+}
+
+:root{
+    --font-family-regular: Poppins-Regular;
+    --font-weight-regular: 400;
+    --font-family-medium: Poppins-Medium;
+    --font-weight-medium: 500;
+    --font-family-semibold: Poppins-SemiBold;
+    --font-weight-semibold: 600;
+    --font-family-bold: Poppins-Bold;
+    --font-weight-bold: 700;
+
+    --blood-color: #8a0303;
+    --light-red-color: #ec9c9c;
+    --white-color: #ffffff;
+    --light-white-color: #ececec;
+    --black-color: #000000;
+    --light-black-color: #212121;
+}
+
+/* Header start */
+header{
+    background-color: var(--blood-color);
+}
+.cust_nav{
+    padding: 10px 0;
+}
+.logo{
+    color: var(--white-color);
+}
+.logo:hover{
+    color: var(--light-white-color);
+}
+.menu{}
+.menu ul{}
+.menu ul li{}
+.menu ul li a{
+    padding: 0 15px !important;
+    font-family: var(--font-family-regular);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    color: var(--light-red-color) !important;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+}
+.menu ul li:last-child a{
+    padding-right: 0 !important;
+}
+.menu ul li a.active{
+    color: var(--white-color) !important;
+}
+.menu ul li a:hover {
+    color: var(--light-white-color) !important;
+}
+/* Header end */
+
+/* Banner start */
+.banner{
+    /* background-image: url('../images/banner/banner_bg.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    
+}
+.banner_content{
+    padding: 100px 0;
+}
+.banner_content h1{
+    color: var(--white-color);
+}
+.carousel-caption {
+    width: 80%;
+    right: 10%;
+    left: 10%;
+    top: 28%;
+    bottom: unset !important;
+}
+.carousel-box{
+    padding: 30px 50px 60px;
+    color: var(--black-color);
+    background-color: rgba(255, 255, 255, 0.7);
+    display: block;
+    overflow: hidden;
+    /* border: 1px solid var(--white-color); */
+    z-index: 1;
+}
+.carousel-box h3{
+    margin: 16px 0 0;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 28px;
+    color: var(--black-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    line-height: 50px;
+}
+.carousel-box h2{
+    margin: 24px 0 0;
+    font-family: var(--font-family-bold);
+    font-weight: var(--font-weight-bold);
+    font-size: 50px;
+    color: var(--black-color);
+    line-height: 70px;
+    letter-spacing: 0.03em;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    top: 28%;
+}
+
+.carousel-box:before, .carousel-box:after {
+    content: "";
+    width: 130px;
+    height: 130px;
+    background: transparent;
+    border: 5px solid var(--blood-color);
+    /* border: 5px solid #FE3C47; */
+    position: absolute;
+    z-index: -1;
+}
+.carousel-box:before{
+    bottom: 0;
+    left: 0;
+    border-top: 0;
+    border-right: 0;
+}
+.carousel-box:after{
+    top: 0;
+    right: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+/* Banner end */
+
+/* Helping People start */
+.helping_people{
+    padding: 60px 0;
+    background-color: #F8F9FA;
+    margin-bottom: 15px;
+}
+.hp_content{}
+.helping_people_content{}
+.helping_people_title{
+    margin-bottom: 10px;
+    font-family: var(--font-family-bold);
+    font-weight: var(--font-weight-bold);
+    font-size: 32px;
+    color: var(--black-color);
+    text-transform: uppercase;
+}
+.helping_people_text{
+    margin-bottom: 0;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: #595757;
+}
+
+.helping_people_button{
+    text-align: center;
+    margin-top: 25px;
+}
+.helping_people_button button{
+    width: 100%;
+    height: 50px;
+    text-transform: uppercase;
+    background-color: var(--blood-color);
+    color: var(--light-red-color);
+    border: 1px solid var(--blood-color);
+    transition: all 0.3s;
+}
+.helping_people_button button:hover{
+    background-color: transparent;
+    color: var(--blood-color);
+    border: 1px solid var(--blood-color);
+}
+/* Helping People end */
+
+/* Donation Process start */
+.donation_process{
+    padding: 80px 0;
+}
+.donation_process_head{
+    text-align: center;
+}
+.cmn_head{
+    margin: 0;
+    font-family: var(--font-family-medium);
+    font-weight: var(--font-weight-medium);
+    font-size: 42px;
+    color: var(--black-color);
+    text-transform: uppercase;
+}
+.cmn_para{
+    margin: 0;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: #595757;
+}
+.divider{
+    width: 25%;
+    height: 20px;
+    border-bottom: 1px solid var(--blood-color);
+    margin: 0 auto 20px;
+}
+.divider span{
+    font-size: 25px;
+    color: var(--blood-color);
+    background-color: #fff;
+    padding: 0 10px;
+}
+
+.process-layout {
+    margin: 32px 0 0;
+    text-align: left;
+    position: relative;
+    padding: 0;
+    background: #F8F9FA;
+}
+.process-layout .process-img {
+    position: relative;
+}
+.process-layout .process-img img {
+    vertical-align: middle;
+    width: 100%;
+}
+.process-layout .process-img .step h3 {
+    color: #FFFFFF;
+    bottom: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 60px;
+    position: absolute;
+    right: 30px;
+    text-align: center;
+    z-index: 9999;
+}
+.process-layout .process-img .step:after {
+    background: #FE3C47;
+    bottom: 0;
+    content: "";
+    height: 100px;
+    opacity: 0.7;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+.process-layout:hover .process-img .step:after {
+    opacity: 1;
+}
+
+.process-info {
+    padding: 32px 16px;
+    text-align: left;
+}
+.process-layout h2 {
+    font-family: var(--font-family-medium);
+    font-weight: var(--font-weight-medium);
+    font-size: 28px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    position: relative;
+}
+.process-layout p {
+    margin-top: 12px;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: #4d4d4d;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    position: relative;
+}
+
+/* Donation Process end */
+
+/* Counter section start */
+.counter_section{
+    background: url('../images/counter/counter_bg.jpeg') rgba(0, 0, 0, 0.8);
+    background-repeat: no-repeat;
+    background-position: 0 70%;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0px;
+}
+/* .counter_wraper{} */
+.counter_section .counter-block-1 {
+    margin: 30px 0;
+    background: #FFFFFF;
+    padding: 25px 0;
+}
+.counter_section .counter-block-1 .icon {
+    border-radius: 0;
+    font-size: 48px;
+    line-height: 50px;
+    margin: 20px 0;
+    text-align: center;
+    color: #111;
+    opacity: 0.4;
+}
+.counter_section .counter-block-1 .counter {
+    display: block;
+    margin-top: 0px;
+    font-size: 42px;
+    color: #FE3C47;
+    font-weight: 600;
+    font-family: 'Dosis', sans-serif;
+}
+.counter_section .counter-block-1 h2 {
+    margin: 15px 0 20px;
+    font-weight: var(--font-weight-regular);
+    font-family: var(--font-family-regular);
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--black-color);
+    letter-spacing: 0.02em;
+    position: relative;
+}
+
+/* Counter section end */
+
+/* Sponsors Section start */
+.sponsor_section{
+    padding: 80px 0;
+}
+.sponsor_section_head{
+    text-align: center;
+}
+.sponsors_logo{
+    margin: 50px 0 0;
+    text-align: center;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+.sponsors_logo:hover{
+    opacity: 1;
+}
+/* Sponsors Section end */
+
+/* Testimonial Section start */
+.testimonials{
+    background: url('../images/testimonial/testimonial_bg.jpeg') rgba(0, 0, 0, 0.8);
+    background-repeat: no-repeat;
+    background-position: 0 70%;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0px;
+}
+.testimonial_wrapper{}
+.testi_content_carousel{
+    padding: 50px 50px 80px;
+    color: var(--black-color);
+    background-color: rgba(255, 255, 255, 0.7);
+    display: block;
+    overflow: hidden;
+    z-index: 1;
+}
+.testi_content_carousel:before, .testi_content_carousel:after {
+    content: "";
+    width: 130px;
+    height: 130px;
+    background: transparent;
+    border: 5px solid var(--blood-color);
+    /* border: 5px solid #FE3C47; */
+    position: absolute;
+    z-index: -1;
+}
+.testi_content_carousel:before{
+    bottom: 0;
+    left: 0;
+    border-top: 0;
+    border-right: 0;
+}
+.testi_content_carousel:after{
+    top: 0;
+    right: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+.testi_content_wrap{
+    text-align: center;
+}
+.testi_content_wrap h1{
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FE3C47;
+    margin-bottom: 24px;
+}
+.testi_content{}
+.testi_content p{
+    position: relative;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 32px;
+    margin: 0 0 24px 0;
+    padding-top: 24px;
+    color: #333333;
+}
+.testi_content p i{
+    color: #808080;
+    font-style: normal;
+    opacity: 0.4;
+}
+.testi_content_footer{}
+.testi_content_footer h2{
+    margin: 0;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.testi_content_footer p{
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #4d4d4d;
+}
+/* Testimonial Section end */
+
+
+/* Register Page start */
+.register_section{
+    background-color: transparent;
+}
+.register-panel{
+    margin-top: 5%;
+}
+
+/* Register Page end */
+
+
+/* Login Page start */
+.login_section{
+    background-color: transparent;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.panel-default {
+    border-color: var(--blood-color);
+    /* border-color: #ddd; */
+}
+.login-panel {
+    margin-top: 25%;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.panel-default>.panel-heading {
+    color: var(--light-red-color);
+    background-color: var(--blood-color);
+    border-color: var(--blood-color);
+    /* color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd; */
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+
+.panel-body {
+    padding: 15px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-select{
+    color: #6d757d;
+}
+.form-control:focus,
+.form-select:focus {
+    /* border-color: #66afe9; */
+    border-color: var(--blood-color);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(138 3 3 / 60%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(138 3 3 / 60%);
+}
+.checkbox {
+    display: block;
+    min-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+.checkbox label {
+    display: inline;
+    font-weight: 400;
+    cursor: pointer;
+}
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.checkbox input[type=checkbox] {
+    float: left;
+    margin-left: -20px;
+}
+input[type=checkbox] {
+    margin: 6px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+}
+.cust-btn {
+    color: var(--light-red-color);;
+    background-color: var(--blood-color);
+    border-color: var(--blood-color);
+    /* background-color: #5cb85c;
+    border-color: #4cae4c; */
+}
+.cust-btn:hover{
+    color: #fff;
+    background-color: var(--blood-color);
+    border-color: var(--blood-color);
+    /* background-color: #47a447;
+    border-color: #398439; */
+}
+.cust-btn:focus {
+    color: var(--white-color);
+    background-color: var(--blood-color);
+    border-color: var(--blood-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(138, 3, 3, .5);
+}
+.btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Login Page end */
+
+
+/*Doners*/
+
+.doners{}
+.doner_info{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.doner_info{
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 29px 0 rgb(68 88 144 / 12%);
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+    z-index: 1;
+}
+.doner_image{}
+.doner_image img{
+    width: 100%;
+    height: 265px;
+    object-fit: cover;
+    border-top-right-radius: 30px;
+}
+
+.doner_info::before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: -60px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-red-color);
+    border-radius: 50%;
+    border-top-right-radius: 0;
+    transform: rotate(-45deg);
+    float: left;
+    margin-top: 50px;
+    margin-left: 20px;
+    transition: all 0.3s;
+    z-index: -1;
+}
+.doner_info:hover::before {
+    /*background: #3498db;*/
+    background-color: #8a0303ad;
+    right: -5px;
+    top: -50px;
+    width: 120%;
+    height: 100%;
+    border-radius: 0%;
+    transform: rotate(90deg);
+    z-index: 1;
+}
+.doner_info .doner_detail{
+    position: absolute;
+    padding-top: 15px;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.3s;
+}
+.doner_info:hover .doner_detail{
+    visibility: visible;
+    opacity: 1;
+}
+.doner_detail .d_name{
+    color: var(--white-color);
+    font-family: var(--font-family-bold);
+    font-weight: var(--font-weight-bold);
+    font-size: 32px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.doner_detail p{
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: var(--white-color);
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 14px;
+    text-align: left;
+}
+.doner_detail .d_details{
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: var(--black-color);
+    background-color: var(--white-color);
+    border: 1px solid var(--white-color);
+    text-transform: capitalize;
+}
+
+.nav-link {
+    color: var(--light-red-color);
+}
+.nav-link:hover, .nav-link:focus {
+    color: var(--blood-color);
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: var(--white-color);
+    background-color: var(--blood-color);
+}
+
+/*.no_doner{*/
+/*    margin-top: 50px;*/
+/*    font-family: var(--font-family-regular);*/
+/*    font-weight: var(--font-weight-regular);*/
+/*    font-size: 24px;*/
+/*    color: var(--blood-color);*/
+/*    text-transform: uppercase;*/
+/*    text-align: center;*/
+/*    animation: zoomdesign 1s ease-in-out infinite alternate;*/
+/*}*/
+/*@keyframes zoomdesign {*/
+/*    from{*/
+        /*transform: scale(1);*/
+        /*transform: rotate(0deg);*/
+        /*text-shadow: 0 0 10px var(--blood-color), 0 0 20px var(--blood-color), 0 0 30px var(--blood-color), 0 0 40px var(--blood-color),0 0 50px var(--blood-color);*/
+        /*text-shadow: 0 0 10px #0fa, 0 0 20px #0fa, 0 0 30px #0fa, 0 0 40px #0fa,0 0 50px #0fa;*/
+/*    }*/
+/*    to {*/
+/*        !*transform: scale(1.05);*!*/
+/*        transform: rotate(5deg);*/
+/*        !*text-shadow: 0 0 60px var(--blood-color), 0 0 70px var(--blood-color);*!*/
+/*        !*text-shadow: 0 0 60px #0fa, 0 0 70px #0fa;*!*/
+/*    }*/
+/*}*/
+
+.no_doner{
+    margin-top: 50px;
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 24px;
+    color: var(--blood-color);
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+            -225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #fff800 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+    /*font-size: 190px;*/
+}
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.no_doner_p1{
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: var(--blood-color);
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient( -225deg, #0c00ff 0%, #ffffff 29%, #00ff24 67%, #00fdff 100% );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+}
+.no_doner_p{
+    font-family: var(--font-family-regular);
+    font-weight: var(--font-weight-regular);
+    font-size: 16px;
+    color: var(--blood-color);
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(
+            -225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #fff800 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+}

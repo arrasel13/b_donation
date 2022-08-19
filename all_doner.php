@@ -67,7 +67,17 @@ include_once 'includes/header.php';
                                         <p class="d_l_d_date">Last Donate: <?= $result5['donate_date'] ?? "No Record" ?></p>
                                         <p class="d_b_group">Blood Group: <?= $details1['b_group_name']; ?></p>
                                         <p class="d_age">Age: <?= $details1['age']; ?></p>
-                                        <p class="d_months">Months: <?php echo $result5['t_year']." yr"." ".$result5['t_months']." months"." ".$result5['t_days']." days"; ?></p>
+                                        <p class="d_months">Months: <?php
+                                            if ($result5['t_year'] > 0 && $result5['t_months'] > 0 && $result5['t_days'] > 0):
+                                                echo $result5['t_year']." Year ".$result5['t_months']." Months ".$result5['t_days']." Days";
+                                            elseif($result5['t_months'] > 0 && $result5['t_days'] > 0):
+                                                echo $result5['t_months']." Months ".$result5['t_days']." Days";
+                                            elseif ($result5['t_days'] > 0):
+                                                echo $result5['t_days']." Days";
+                                            else:
+                                                echo "No Record";
+                                            endif;
+                                        ?></p>
                                         <p class="d_status">Status:
                                             <?php
                                                 if ($result5['t_months'] >= 3):
@@ -124,7 +134,17 @@ include_once 'includes/header.php';
                                         <p class="d_l_d_date">Last Donate: <?= $result4['donate_date']; ?></p>
                                         <p class="d_b_group">Blood Group: <?= $details2['b_group_name']; ?></p>
                                         <p class="d_age">Age: <?= $details2['age']; ?></p>
-                                        <p class="d_months">Months: <?php echo $result4['t_year']." yr"." ".$result4['t_months']." months"." ".$result4['t_days']." days"; ?></p>
+                                        <p class="d_months">Months: <?php
+                                            if ($result4['t_year'] > 0 && $result4['t_months'] > 0 && $result4['t_days'] > 0):
+                                                echo $result4['t_year']." Year ".$result4['t_months']." Months ".$result4['t_days']." Days";
+                                            elseif($result4['t_months'] > 0 && $result4['t_days'] > 0):
+                                                echo $result4['t_months']." Months ".$result4['t_days']." Days";
+                                            elseif ($result4['t_days'] > 0):
+                                                echo $result4['t_days']." Days";
+                                            else:
+                                                echo "No Record";
+                                            endif;
+                                        ?></p>
                                         <p class="d_status">Status:
                                             <?php
                                             if ($result4['t_months'] >= 3):

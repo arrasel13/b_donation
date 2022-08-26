@@ -42,7 +42,7 @@ if (isset($_POST['register_btn'])){
 
     if ($password === $c_password){
 
-        $sql1 = "INSERT INTO users (display_name, user_image, email, password) VALUES ('$display_name','$target_file','$email','$password') ";
+            $sql1 = "INSERT INTO users (display_name, user_image, email, password) VALUES ('$display_name','$target_file','$email','$password') ";
 
         if ($conn->query($sql1) === TRUE){
             $last_id = $conn->insert_id;

@@ -13,6 +13,7 @@ if (isset($_SESSION['username'])){
 
 if (isset($_GET['id']) AND isset($_GET['val'])){
     $s_id = $_SESSION['userid'];
+    $s_role = $_SESSION['userrole'];
     $u_id = $_GET['val'];
     $id = $_GET['id'];
 
@@ -21,7 +22,7 @@ if (isset($_GET['id']) AND isset($_GET['val'])){
 //    echo $id."<br>";
 //    exit();
 
-    if ($s_id === $u_id){
+    if ($s_id == $u_id || $s_role == 1){
 
         $select_d_history = "SELECT * FROM b_d_history WHERE id=$id AND u_id = $u_id";
         $run_sql = $conn->query($select_d_history);
@@ -77,8 +78,20 @@ include_once 'includes/side_nav.php';
 
                     <div class="col-md-12">
                         <label for="donate_date" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control donate_date" id="donate_date" name="donate_date" value="<?= date('Y-m-d',strtotime ($d_history_info['donate_date'])); ?>" required>
+                        <input type="date" class="form-control donate_date" id="donate_date" name="donate_date" value="<?= date('Y-m-d',strtotime ($d_history_info['donate_date'])); ?>" <?php if($s_role == 1 && $s_id != $u_id){echo 'readonly';} ?> required>
                     </div>
+                    <?php
+                    if($s_role == 1):
+                    ?>
+                    <div class="col-md-12">
+                        <label for="d_d_approve" class="form-label">Approve Donate Date</label>
+                        <select id="d_d_approve" class="form-select d_d_approve" name="d_d_approve" required>
+                            <option selected disabled>Approve Donate Date</option>
+                            <option value="1" <?php echo ($d_history_info['d_d_approve'] == 1)? 'selected="selected"':'';?>>Approve</option>
+                            <option value="2" <?php echo ($d_history_info['d_d_approve'] == 2)? 'selected="selected"':'';?>>Pending</option>
+                        </select>
+                    </div>
+                    <?php endif; ?>
 
                     <div class="col-12 mt-5">
                         <button class="btn btn-success" type="submit" name="update_history">Update Info</button>

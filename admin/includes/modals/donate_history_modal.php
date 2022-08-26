@@ -12,6 +12,7 @@
                     <div class="col-md-12">
                         <label for="display_name" class="form-label">Display Name</label>
                         <input type="hidden" class="form-control uid" id="uid" name="uid" value="<?= $userid; ?>" required>
+                        <input type="hidden" class="form-control bg_id" id="bg_id" name="bg_id" value="<?= $b_g_id['bg_id']; ?>" required>
                         <input type="text" class="form-control display_name" id="display_name" name="display_name" value="<?= $username; ?>" placeholder="Display Name" readonly required>
                     </div>
 

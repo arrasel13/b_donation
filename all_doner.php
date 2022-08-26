@@ -51,9 +51,37 @@ include_once 'includes/header.php';
 //                                        print_r($details1);
 //                                        echo "</pre>";
                                 $bgid = $details1['b_group_id'];
-                                $sql5 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, bdh.t_year, bdh.t_months, bdh.t_days, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $bgid ORDER BY bdh.donate_date DESC LIMIT 0,1";
+//                                $sql5 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, bdh.t_year, bdh.t_months, bdh.t_days, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $bgid ORDER BY bdh.donate_date DESC LIMIT 0,1";
+//                                $sql5 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $bgid ORDER BY bdh.donate_date DESC LIMIT 0,1";
+//                                $sql5 = "SELECT bdh.u_id, bdh.bg_id, MAX(bdh.donate_date), ui.u_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND bdh.bg_id = ui.b_group_id AND bdh.bg_id = $bgid GROUP BY bdh.u_id";
+                                $sql5 = "SELECT bdh.u_id, bdh.bg_id, bdh.donate_date, ui.u_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND bdh.bg_id = ui.b_group_id AND bdh.bg_id = $bgid ORDER BY bdh.donate_date DESC LIMIT 0,1";
                                 $run5 = $conn->query($sql5);
                                 $result5 = $run5->fetch_assoc();
+//                                 echo "<pre>";
+//                                 print_r($result5);
+//                                 var_dump($result5);
+//                                 echo "</pre>";
+
+                                $age_diff = abs(strtotime(date('d-m-Y')) - strtotime($details1['dob']));
+                                $age_year = floor($age_diff / (365*60*60*24));
+                                $age_month = floor(($age_diff - $age_year * 365*60*60*24) / (30*60*60*24));
+                                $age_day = floor(($age_diff - $age_year * 365*60*60*24 - $age_month*30*60*60*24)/ (60*60*24));
+
+                                $result5['donate_date'] = isset($result5['donate_date']) ? $result5['donate_date'] : date('d-m-Y',strtotime("-1 days"));
+
+                                $diff = abs(strtotime(date('Y-m-d')) - strtotime($result5['donate_date']));
+                                $years = floor($diff / (365*60*60*24));
+                                $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                                $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+//                                if($run5->num_rows > 0){
+//                                    $result5 = $run5->fetch_assoc();
+//                                }else{
+//                                    $result5 = "No Record";
+//                                    echo "<pre>";
+//                                    print_r($result5);
+//                                    echo "</pre>";
+//                                }
 
                             ?>
                             <div class="col-lg-3">
@@ -64,23 +92,39 @@ include_once 'includes/header.php';
                                     <div class="doner_detail">
                                         <h2 class="d_name"><?= $details1['fname'].' '.$details1['lname']; ?></h2>
                                         <p class="d_c_no">Mobile: <?= $details1['contact_number']; ?></p>
-                                        <p class="d_l_d_date">Last Donate: <?= $result5['donate_date'] ?? "No Record" ?></p>
+                                        <p class="d_l_d_date">Last Donate: <?= date('d-m-Y',strtotime($result5['donate_date'])); ?></p>
                                         <p class="d_b_group">Blood Group: <?= $details1['b_group_name']; ?></p>
-                                        <p class="d_age">Age: <?= $details1['age']; ?></p>
+                                        <p class="d_age">Age: <?php
+
+                                            if ($age_year > 0 && $age_month > 0 && $age_day >= 0):
+                                                echo $age_year." Year ".$age_month." Months ".$age_day." Days";
+
+                                            elseif($age_month > 0 && $age_day >= 0):
+                                                echo $age_month." Months ".$age_day." Days";
+
+                                            elseif ($age_day >= 0):
+                                                echo $age_day." Days";
+
+                                            else:
+                                                echo "No Record";
+                                            endif;
+                                        ?></p>
                                         <p class="d_months">Months: <?php
-                                            if ($result5['t_year'] > 0 && $result5['t_months'] > 0 && $result5['t_days'] > 0):
-                                                echo $result5['t_year']." Year ".$result5['t_months']." Months ".$result5['t_days']." Days";
-                                            elseif($result5['t_months'] > 0 && $result5['t_days'] > 0):
-                                                echo $result5['t_months']." Months ".$result5['t_days']." Days";
-                                            elseif ($result5['t_days'] > 0):
-                                                echo $result5['t_days']." Days";
+
+                                            if ($years > 0 && $months > 0 && $days > 0):
+                                                echo $years." Year ".$months." Months ".$days." Days";
+                                            elseif($months > 0 && $days > 0):
+                                                echo $months." Months ".$days." Days";
+                                            elseif ($days > 0):
+                                                echo $days." Days";
+
                                             else:
                                                 echo "No Record";
                                             endif;
                                         ?></p>
                                         <p class="d_status">Status:
                                             <?php
-                                                if ($result5['t_months'] >= 3):
+                                                if ($months >= 3):
                                                     echo "<span class='no_doner_p1'>Available</span>";
                                                 else:
                                                     echo "<span class='no_doner_p1'>Not Available</span>";
@@ -119,9 +163,26 @@ include_once 'includes/header.php';
 //                                        echo "<pre>";
 //                                        print_r($details2);
 //                                        echo "</pre>";
-                                        $sql4 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, bdh.t_year, bdh.t_months, bdh.t_days, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $id ORDER BY bdh.donate_date DESC LIMIT 0,1";
+                                        $sql4 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $id ORDER BY bdh.donate_date DESC LIMIT 0,1";
                                         $run4 = $conn->query($sql4);
                                         $result4 = $run4->fetch_assoc();
+
+                                        $age_diff = abs(strtotime(date('d-m-Y')) - strtotime($details2['dob']));
+                                        $age_year = floor($age_diff / (365*60*60*24));
+                                        $age_month = floor(($age_diff - $age_year * 365*60*60*24) / (30*60*60*24));
+                                        $age_day = floor(($age_diff - $age_year * 365*60*60*24 - $age_month*30*60*60*24)/ (60*60*24));
+
+//                                        if(is_null($result4['donate_date'])){
+//                                            $result4['donate_date'] = date('d-m-Y',strtotime("-1 days"));
+////                                            echo $result4['donate_date'];
+//                                        }
+                                        $result4['donate_date'] = isset($result4['donate_date']) ? $result4['donate_date'] : date('d-m-Y',strtotime("-1 days"));
+
+                                        $diff = abs(strtotime(date('Y-m-d')) - strtotime($result4['donate_date']));
+                                        $years = floor($diff / (365*60*60*24));
+                                        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                                        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
                             ?>
                             <div class="col-lg-3">
                                 <div class="doner_info">
@@ -131,23 +192,38 @@ include_once 'includes/header.php';
                                     <div class="doner_detail">
                                         <h2 class="d_name"><?= $details2['fname'].' '.$details2['lname']; ?></h2>
                                         <p class="d_c_no">Mobile: <?= $details2['contact_number']; ?></p>
-                                        <p class="d_l_d_date">Last Donate: <?= $result4['donate_date']; ?></p>
+                                        <p class="d_l_d_date">Last Donate: <?= date('d-m-Y',strtotime($result4['donate_date'])); ?></p>
                                         <p class="d_b_group">Blood Group: <?= $details2['b_group_name']; ?></p>
-                                        <p class="d_age">Age: <?= $details2['age']; ?></p>
+                                        <p class="d_age">Age: <?php
+
+                                            if ($age_year > 0 && $age_month > 0 && $age_day >= 0):
+                                                echo $age_year." Year ".$age_month." Months ".$age_day." Days";
+
+                                            elseif($age_month > 0 && $age_day >= 0):
+                                                echo $age_month." Months ".$age_day." Days";
+
+                                            elseif ($age_day >= 0):
+                                                echo $age_day." Days";
+
+                                            else:
+                                                echo "No Record";
+                                            endif;
+                                        ?></p>
                                         <p class="d_months">Months: <?php
-                                            if ($result4['t_year'] > 0 && $result4['t_months'] > 0 && $result4['t_days'] > 0):
-                                                echo $result4['t_year']." Year ".$result4['t_months']." Months ".$result4['t_days']." Days";
-                                            elseif($result4['t_months'] > 0 && $result4['t_days'] > 0):
-                                                echo $result4['t_months']." Months ".$result4['t_days']." Days";
-                                            elseif ($result4['t_days'] > 0):
-                                                echo $result4['t_days']." Days";
+                                            if ($years > 0 && $months > 0 && $days > 0):
+                                                echo $years." Year ".$months." Months ".$days." Days";
+                                            elseif($months > 0 && $days > 0):
+                                                echo $months." Months ".$days." Days";
+                                            elseif ($days > 0):
+                                                echo $days." Days";
+
                                             else:
                                                 echo "No Record";
                                             endif;
                                         ?></p>
                                         <p class="d_status">Status:
                                             <?php
-                                            if ($result4['t_months'] >= 3):
+                                            if ($months >= 3):
                                                 echo "<span class='no_doner_p1'>Available</span>";
                                             else:
                                                 echo "<span class='no_doner_p1'>Not Available</span>";

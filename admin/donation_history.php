@@ -31,6 +31,9 @@ if ($_SESSION['userrole'] == 1){
     $d_history_query = $conn->query($select_d_history);
 }
 
+$select_bg_group = "SELECT b_group_id bg_id FROM users_info WHERE u_id = $userid";
+$run_bg_group = $conn->query($select_bg_group);
+$b_g_id = $run_bg_group->fetch_assoc();
 
 include_once 'includes/header.php';
 ?>
@@ -46,8 +49,7 @@ include_once 'includes/side_nav.php';
 </ol>
 <div class="card mb-4">
     <div class="card-header d-flex justify-content-end">
-        <!--            <i class="fa-solid fa-droplet"></i> Blood Group List-->
-        <button class="btn btn-primary" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationDateAdd">Add Record</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationDateAdd">Add Record</button>
     </div>
     <div class="card-body">
         <table id="datatablesSimple">
@@ -56,6 +58,7 @@ include_once 'includes/side_nav.php';
                 <th>SN</th>
                 <th>Name</th>
                 <th>Donate Date</th>
+                <th>Donation Approve</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -70,6 +73,13 @@ include_once 'includes/side_nav.php';
                         <td><?= $i; ?></td>
                         <td><?= $d_history_info['u_name']; ?></td>
                         <td><?= $d_history_info['donate_date']; ?></td>
+                        <td><?php
+                        if($d_history_info['d_d_approve'] == 1){
+                            echo "<p class='text-success'>Approve</p>";
+                        }else{
+                            echo "<p class='text-info'>Pending</p>";
+                        }
+                        ?></td>
                         <td class="d-flex">
                             <a href="d_history_info_edit.php?id=<?php echo $d_history_info['id']; ?>&val=<?= $d_history_info['u_id']; ?>" class="btn btn-info btn-sm me-1" title="Edit Info"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
@@ -87,7 +97,6 @@ include_once 'includes/side_nav.php';
         </table>
     </div>
 </div>
-
 
 
 

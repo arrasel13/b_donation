@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$pass = "root";
+$pass = "";
 $dbname = "blood_dm";
 
 $conn = mysqli_connect($host, $user, $pass, $dbname);

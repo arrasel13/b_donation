@@ -1,3 +1,6 @@
+<?php
+include_once 'includes/doner_form.php';
+?>
     <!-- jQuery -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- jQuery UI-->
@@ -13,6 +16,27 @@
     <!-- Doner Details Info -->
     <script type='text/javascript'>
         $(document).ready(function(){
+
+            $('.become_doner_btn').click(function(){
+
+                // var blood_group_id = $(this).data('id');
+                // dataString = ??? ;
+                // var jsonString = JSON.stringify(dataString);
+
+                // AJAX request
+                $.ajax({
+                    url: 'includes/d_f_content.php',
+                    // type: 'post',
+                    // data: {data: jsonString},
+                    success: function(response){
+                        // Add response in Modal body
+                        $('.modal-body').html(response);
+
+                        // Display Modal
+                        $('#becomeDoner').modal('show');
+                    }
+                });
+            });
 
             $('.d_details').click(function(){
 
@@ -36,7 +60,6 @@
     </script>
 
     <?php
-        include_once 'includes/doner_form.php';
         include_once './includes/toastr.php';
     ?>
 

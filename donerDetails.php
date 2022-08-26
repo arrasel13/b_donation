@@ -11,12 +11,29 @@ if (isset($_POST['bg_id'])){
 //    print_r($dd_result1);
 //    echo "</pre>";
 
-    $dd_sql2 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, bdh.t_year, bdh.t_months, bdh.t_days, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $b_g_id ORDER BY bdh.donate_date DESC LIMIT 0,1";
+    // $dd_sql2 = "SELECT DISTINCT bdh.u_id, bdh.donate_date, bdh.t_year, bdh.t_months, bdh.t_days, ui.u_id, ui.b_group_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND ui.b_group_id = $b_g_id ORDER BY bdh.donate_date DESC LIMIT 0,1";
+    $dd_sql2 = "SELECT bdh.u_id, bdh.bg_id, bdh.donate_date, ui.u_id FROM b_d_history bdh, users_info ui WHERE bdh.u_id = ui.u_id AND bdh.bg_id = ui.b_group_id AND bdh.bg_id = $b_g_id ORDER BY bdh.donate_date DESC LIMIT 0,1";
     $dd_run2 = $conn->query($dd_sql2);
     $dd_result2 = $dd_run2->fetch_assoc();
 //    echo "<pre>";
 //    print_r($dd_result2);
 //    echo "</pre>";
+
+    $age_diff = abs(strtotime(date('d-m-Y')) - strtotime($dd_result1['dob']));
+    $age_year = floor($age_diff / (365*60*60*24));
+    $age_month = floor(($age_diff - $age_year * 365*60*60*24) / (30*60*60*24));
+    $age_day = floor(($age_diff - $age_year * 365*60*60*24 - $age_month*30*60*60*24)/ (60*60*24));
+
+    $dd_result2['donate_date'] = isset($dd_result2['donate_date']) ? $dd_result2['donate_date'] : date('d-m-Y',strtotime("-1 days"));
+
+    $diff = abs(strtotime(date('Y-m-d')) - strtotime($dd_result2['donate_date']));
+    $years = floor($diff / (365*60*60*24));
+    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+    $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+//    echo $years."<br>";
+//    echo $months."<br>";
+//    echo $days."<br>";
 
     $dd_sql3 = "SELECT * FROM blood_group WHERE id= $b_g_id";
     $dd_run3 = $conn->query($dd_sql3);
@@ -50,7 +67,7 @@ if (isset($_POST['bg_id'])){
 
         <td>Doner Available </td>
         <td><?php
-            if ($dd_result2['t_months'] > 3):
+            if ($months >= 3):
                 echo "<p class='no_doner_p'>Available</p>";
             else:
                 echo "<p class='no_doner_p'>Not Available</p>";
@@ -70,7 +87,18 @@ if (isset($_POST['bg_id'])){
         <td><?= $dd_result1['dob']; ?></td>
 
         <td>Age: </td>
-        <td><?= $dd_result1['age']; ?></td>
+        <td><?php
+            if ($age_year > 0 && $age_month > 0 && $age_day >= 0):
+                echo $age_year." Year ".$age_month." Months ".$age_day." Days";
+            elseif($age_month > 0 && $age_day >= 0):
+                echo $age_month." Months ".$age_day." Days";
+            elseif ($age_day >= 0):
+                echo $age_day." Days";
+
+            else:
+                echo "No Record";
+            endif;
+        ?></td>
     </tr>
     <tr>
         <td>Gender: </td>
@@ -97,16 +125,17 @@ if (isset($_POST['bg_id'])){
     </tr>
     <tr>
         <td>Last Donate: </td>
-        <td><?= $dd_result2['donate_date'] ?? "No Record"; ?></td>
+        <td><?= date('d-m-Y',strtotime($dd_result2['donate_date'])); ?></td>
 
         <td>Donation Time Passed: </td>
         <td><?php
-            if ($dd_result2['t_year'] > 0 && $dd_result2['t_months'] > 0 && $dd_result2['t_days'] > 0):
-                echo $dd_result2['t_year']." Year ".$dd_result2['t_months']." Months ".$dd_result2['t_days']." Days";
-            elseif($dd_result2['t_months'] > 0 && $dd_result2['t_days'] > 0):
-                echo $dd_result2['t_months']." Months ".$dd_result2['t_days']." Days";
-            elseif ($dd_result2['t_days'] > 0):
-                echo $dd_result2['t_days']." Days";
+            if ($years > 0 && $months > 0 && $days > 0):
+                echo $years." Year ".$months." Months ".$days." Days";
+            elseif($months > 0 && $days > 0):
+                echo $months." Months ".$days." Days";
+            elseif ($days > 0):
+                echo $days." Days";
+
             else:
                 echo "No Record";
             endif;

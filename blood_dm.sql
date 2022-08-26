@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Aug 19, 2022 at 03:45 PM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- Host: localhost
+-- Generation Time: Aug 26, 2022 at 06:01 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,21 +56,21 @@ INSERT INTO `blood_group` (`id`, `b_group_name`, `status`) VALUES
 CREATE TABLE `b_d_history` (
   `id` int(3) NOT NULL,
   `u_id` int(3) NOT NULL,
+  `bg_id` int(3) NOT NULL,
   `u_name` varchar(255) NOT NULL,
   `donate_date` varchar(255) NOT NULL,
-  `t_year` int(3) NOT NULL,
-  `t_months` int(3) NOT NULL,
-  `t_days` int(3) NOT NULL,
-  `d_available` tinyint(1) NOT NULL
+  `d_d_approve` int(1) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `b_d_history`
 --
 
-INSERT INTO `b_d_history` (`id`, `u_id`, `u_name`, `donate_date`, `t_year`, `t_months`, `t_days`, `d_available`) VALUES
-(1, 1, 'AR Rasel', '01-01-2022', 0, 7, 19, 1),
-(2, 1, 'AR Rasel', '01-04-2022', 0, 4, 19, 1);
+INSERT INTO `b_d_history` (`id`, `u_id`, `bg_id`, `u_name`, `donate_date`, `d_d_approve`) VALUES
+(1, 1, 6, 'AR Rasel', '2019-01-01', 1),
+(2, 2, 1, 'Minhaz Faisal', '2022-02-01', 1),
+(4, 1, 6, 'AR Rasel', '2019-04-01', 1),
+(5, 2, 1, 'Minhaz Faisal', '2022-05-02', 2);
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,7 @@ CREATE TABLE `users` (
   `user_image` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `user_role` int(1) NOT NULL DEFAULT '2'
+  `user_role` int(1) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -114,8 +114,8 @@ CREATE TABLE `users_info` (
   `b_group_id` int(2) NOT NULL,
   `contact_address` text NOT NULL,
   `additional_info` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -169,7 +169,7 @@ ALTER TABLE `blood_group`
 -- AUTO_INCREMENT for table `b_d_history`
 --
 ALTER TABLE `b_d_history`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

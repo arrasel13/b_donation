@@ -1,9 +1,9 @@
 <?php
-session_start();
-include_once 'admin/db/connection.php';
-
-$select_blood_group = "SELECT * FROM blood_group";
-$b_group_query = $conn->query($select_blood_group);
+//session_start();
+//include_once 'admin/db/connection.php';
+//
+//$select_blood_group = "SELECT * FROM blood_group";
+//$b_group_query = $conn->query($select_blood_group);
 
   function isPageActive($currect_page){
     $url_array =  explode('/', $_SERVER['REQUEST_URI']) ;
@@ -41,7 +41,7 @@ $b_group_query = $conn->query($select_blood_group);
         <nav class="navbar navbar-expand-lg cust_nav">
             <div class="container-fluid">
               <!-- Logo -->
-              <a class="navbar-brand logo" href="#"><i class="fa-solid fa-hand-holding-droplet"></i> Blood Donation</a>
+              <a class="navbar-brand logo" href="index.php"><i class="fa-solid fa-hand-holding-droplet"></i> Blood Donation</a>
               <button class="navbar-toggler cust_toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -56,9 +56,14 @@ $b_group_query = $conn->query($select_blood_group);
                   <li class="nav-item">
                     <a class="nav-link <?php isPageActive('all_doner.php');?>" href="all_doner.php">Doner List</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#becomeDoner">Become a Doner</a>
+<!--                  <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#becomeDoner">Become a Doner</a>-->
+<!--                  </li>-->
+
+                    <li class="nav-item">
+                        <button class="nav-link bdoner_btn become_doner_btn">Become a Doner</button>
                   </li>
+
 <!--                  <li class="nav-item">-->
 <!--                    <a class="nav-link --><?php //isPageActive('be_donner.php');?><!--" href="be_donner.php">Become a Doner</a>-->
 <!--                  </li>-->

@@ -68,6 +68,21 @@ header{
 .menu ul li a:hover {
     color: var(--light-white-color) !important;
 }
+.bdoner_btn{
+    padding: 0 15px !important;
+    font-family: var(--font-family-regular);
+    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    color: var(--light-red-color) !important;
+    letter-spacing: 1px;
+    background-color: transparent;
+    border: none;
+}
+.bdoner_btn:hover{
+    color: var(--light-white-color) !important;
+    /*background-color: transparent;*/
+    /*border: none;*/
+}
 /* Header end */
 
 /* Banner start */

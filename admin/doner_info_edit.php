@@ -97,7 +97,7 @@ include_once 'includes/side_nav.php';
         <div class="col-md-3">
             <label for="blood_group" class="form-label">Blood Group</label>
             <select id="blood_group" class="form-select blood_group" name="blood_group" required>
-                <option selected>Blood Group...</option>
+                <option selected disabled>Blood Group...</option>
                 <?php if ($b_group_query->num_rows > 0): ?>
                     <?php while($b_group_name = $b_group_query->fetch_assoc()): ?>
                         <option value="<?= $b_group_name['id']; ?>" <?php echo ($doner_info['ubgroupid'] == $b_group_name['id'])? 'selected="selected"':'';?>><?= $b_group_name['b_group_name']; ?></option>
